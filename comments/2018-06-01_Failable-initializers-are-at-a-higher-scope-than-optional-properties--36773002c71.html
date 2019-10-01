@@ -1,0 +1,72 @@
+<!DOCTYPE html><html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>Failable initializers are at a higher scope than optional properties.</title><style>
+      * {
+        font-family: Georgia, Cambria, "Times New Roman", Times, serif;
+      }
+      html, body {
+        margin: 0;
+        padding: 0;
+      }
+      h1 {
+        font-size: 50px;
+        margin-bottom: 17px;
+        color: #333;
+      }
+      h2 {
+        font-size: 24px;
+        line-height: 1.6;
+        margin: 30px 0 0 0;
+        margin-bottom: 18px;
+        margin-top: 33px;
+        color: #333;
+      }
+      h3 {
+        font-size: 30px;
+        margin: 10px 0 20px 0;
+        color: #333;
+      }
+      header {
+        width: 640px;
+        margin: auto;
+      }
+      section {
+        width: 640px;
+        margin: auto;
+      }
+      section p {
+        margin-bottom: 27px;
+        font-size: 20px;
+        line-height: 1.6;
+        color: #333;
+      }
+      section img {
+        max-width: 640px;
+      }
+      footer {
+        padding: 0 20px;
+        margin: 50px 0;
+        text-align: center;
+        font-size: 12px;
+      }
+      .aspectRatioPlaceholder {
+        max-width: auto !important;
+        max-height: auto !important;
+      }
+      .aspectRatioPlaceholder-fill {
+        padding-bottom: 0 !important;
+      }
+      header,
+      section[data-field=subtitle],
+      section[data-field=description] {
+        display: none;
+      }
+      </style></head><body><article class="h-entry">
+<header>
+<h1 class="p-name">Failable initializers are at a higher scope than optional properties.</h1>
+</header>
+<section data-field="subtitle" class="p-summary">
+When I call the default initializer I will always have a person’s firstName even if it is blank, but middle and last name would be…
+</section>
+<section data-field="body" class="e-content">
+<section name="77d2" class="section section--body section--first section--last"><div class="section-divider"><hr class="section-divider"></div><div class="section-content"><div class="section-inner sectionLayout--insetColumn"><p name="0f48" id="0f48" class="graf graf--p graf--leading">Failable initializers are at a higher scope than optional properties. While I could have an optional property in a class that is guaranteed to be there such as a Person class that contains non-optional property for <code class="markup--code markup--p-code">firstName</code>, but optional properties for <code class="markup--code markup--p-code">middleName</code>, and <code class="markup--code markup--p-code">lastName</code> (think Prince).</p><p name="7031" id="7031" class="graf graf--p graf-after--p">When I call the default initializer I will always have a person’s <code class="markup--code markup--p-code">firstName</code> even if it is blank, but middle and last name would be optional. We’d still have a Person created if we used <code class="markup--code markup--p-code">Person(firstName: “Bob”, middleName: nil, lastName: “Roebling”)</code>. It wouldn’t fail because <code class="markup--code markup--p-code">Person(firstName: 1, middleName: 2, lastName: 3)</code> would still be created because Int can be casted to a String.</p><p name="3b58" id="3b58" class="graf graf--p graf-after--p">With a failable initializer we are saying if the class initialization might fail based on the data that was passed in, fail the entire initialization and return <code class="markup--code markup--p-code">nil</code>. If we had a variable named <code class="markup--code markup--p-code">myPerson</code> that was initialized with <code class="markup--code markup--p-code">nil</code> for the <code class="markup--code markup--p-code">firstName</code> property, then we would want to return <code class="markup--code markup--p-code">nil</code> to denote that the class could not be created at all.</p><p name="8459" id="8459" class="graf graf--p graf-after--p graf--trailing">In a nutshell, optional properties are used when you plan to return an instance of a class every time the initializer is called. A failable initializer is used when the entire instance doesn’t need to exist. According to Apple’s docs on <a href="https://developer.apple.com/swift/blog/?id=17" data-href="https://developer.apple.com/swift/blog/?id=17" class="markup--anchor markup--p-anchor" rel="noopener" target="_blank">failable initializers</a>, they would be used when initialization depends on a resource such as data from a JSON file.</p></div></div></section>
+</section>
+<footer><p>By <a href="https://medium.com/@broebling" class="p-author h-card">Bob Roebling</a> on <a href="https://medium.com/p/36773002c71"><time class="dt-published" datetime="2018-06-01T20:12:29.641Z">June 1, 2018</time></a>.</p><p><a href="https://medium.com/@broebling/failable-initializers-are-at-a-higher-scope-than-optional-properties-36773002c71" class="p-canonical">Canonical link</a></p><p>Exported from <a href="https://medium.com">Medium</a> on October 1, 2019.</p></footer></article></body></html>

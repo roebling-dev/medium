@@ -1,0 +1,72 @@
+<!DOCTYPE html><html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>DispatchQueue.main (the main queue) is a serial queue.</title><style>
+      * {
+        font-family: Georgia, Cambria, "Times New Roman", Times, serif;
+      }
+      html, body {
+        margin: 0;
+        padding: 0;
+      }
+      h1 {
+        font-size: 50px;
+        margin-bottom: 17px;
+        color: #333;
+      }
+      h2 {
+        font-size: 24px;
+        line-height: 1.6;
+        margin: 30px 0 0 0;
+        margin-bottom: 18px;
+        margin-top: 33px;
+        color: #333;
+      }
+      h3 {
+        font-size: 30px;
+        margin: 10px 0 20px 0;
+        color: #333;
+      }
+      header {
+        width: 640px;
+        margin: auto;
+      }
+      section {
+        width: 640px;
+        margin: auto;
+      }
+      section p {
+        margin-bottom: 27px;
+        font-size: 20px;
+        line-height: 1.6;
+        color: #333;
+      }
+      section img {
+        max-width: 640px;
+      }
+      footer {
+        padding: 0 20px;
+        margin: 50px 0;
+        text-align: center;
+        font-size: 12px;
+      }
+      .aspectRatioPlaceholder {
+        max-width: auto !important;
+        max-height: auto !important;
+      }
+      .aspectRatioPlaceholder-fill {
+        padding-bottom: 0 !important;
+      }
+      header,
+      section[data-field=subtitle],
+      section[data-field=description] {
+        display: none;
+      }
+      </style></head><body><article class="h-entry">
+<header>
+<h1 class="p-name">DispatchQueue.main (the main queue) is a serial queue.</h1>
+</header>
+<section data-field="subtitle" class="p-summary">
+sync and async do not determine serialization or currency of a queue, but instead refer to how the task is handled.
+</section>
+<section data-field="body" class="e-content">
+<section name="ce05" class="section section--body section--first section--last"><div class="section-divider"><hr class="section-divider"></div><div class="section-content"><div class="section-inner sectionLayout--insetColumn"><p name="450b" id="450b" class="graf graf--p graf--leading"><code class="markup--code markup--p-code">DispatchQueue.main</code> (the main queue) is a serial queue.</p><p name="0797" id="0797" class="graf graf--p graf-after--p"><code class="markup--code markup--p-code">sync</code> and <code class="markup--code markup--p-code">async</code> do not determine serialization or currency of a queue, but instead refer to how the task is handled.</p><blockquote name="1207" id="1207" class="graf graf--blockquote graf-after--p"><strong class="markup--strong markup--blockquote-strong">Synchronous</strong> function returns the control on the current queue only after task is finished. It blocks the queue and waits until the task is finished.</blockquote><blockquote name="c6ca" id="c6ca" class="graf graf--blockquote graf-after--blockquote"><strong class="markup--strong markup--blockquote-strong">Asynchronous</strong> function returns control on the current queue right after task has been sent to be performed on the different queue. It doesn’t wait until the task is finished. It doesn’t block the queue.</blockquote><p name="859c" id="859c" class="graf graf--p graf-after--blockquote">From <a href="https://stackoverflow.com/a/44324968" data-href="https://stackoverflow.com/a/44324968" class="markup--anchor markup--p-anchor" rel="noopener" target="_blank">Stack Overflow</a></p><p name="fbd5" id="fbd5" class="graf graf--p graf-after--p">Essentially this just means that <code class="markup--code markup--p-code">sync</code> will block the main thread until the task has finished, <code class="markup--code markup--p-code">async</code> means this will happen on a background thread and update the main thread when it is finished.</p><p name="5679" id="5679" class="graf graf--p graf-after--p">It is important that when you use <code class="markup--code markup--p-code">DispatchQueue.main.sync</code> that you are only returning from a background thread or it’s some user facing task because this will prevent the UI From updating (unless you are using this function to update the UI).</p><p name="8128" id="8128" class="graf graf--p graf-after--p graf--trailing">I strongly suggest that you follow the Stack Overflow link above and read the full answer for more context.</p></div></div></section>
+</section>
+<footer><p>By <a href="https://medium.com/@broebling" class="p-author h-card">Bob Roebling</a> on <a href="https://medium.com/p/4607417fe535"><time class="dt-published" datetime="2018-06-21T23:36:55.333Z">June 21, 2018</time></a>.</p><p><a href="https://medium.com/@broebling/dispatchqueue-main-the-main-queue-is-a-serial-queue-4607417fe535" class="p-canonical">Canonical link</a></p><p>Exported from <a href="https://medium.com">Medium</a> on October 1, 2019.</p></footer></article></body></html>
